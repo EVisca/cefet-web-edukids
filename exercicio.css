@@ -1,7 +1,18 @@
 /* Exercício 1: Criar uma transição para quando o mouse estiver em cima dos
  * botões play/stop (para que o elemento se revele lentamente)
  */
- #controles ul {}
+ /*Here we go again*/
+ #controles ul {
+        transition: 2s; /*duration*/
+        transition-timing-function: ease-in-out; /*tipo e forma*/
+
+ }
+
+ #controles hover ul {
+
+    transition: 2s; /*duration*/
+    transition-timing-function: ease-in-out; /*tipo e forma*/
+ }
 
 /*
  * Exercício 2: Você deve implementar uma metáfora visual para cada um dos 4
@@ -11,17 +22,105 @@
  *   - perturbado: animal fica pulsando
  *   - instinto-selvagem: animal dá um salto e cresce, com uma borda vermelha
  */
-.agitado {}
-.agitado img {}
+ /*Ja existem imagens na pasta junto do repo clonado
+ 9 animais + 1 "desconhecido". Fazer os efeitos vide as descrições acima   */
 
-.alimentado {}
-.alimentado img {}
+.agitado {
 
-.perturbado {}
-.perturbado img {}
+    /* animation: name duration timing-function delay iteration-count direction fill-mode;*/
+    animation: blink 1000ms linear 0s infinite alternate;
 
-.instinto-selvagem {}
-.instinto-selvagem img {}
+}
+
+.agitado img {
+
+    background-color: #02e88f;
+    transiton: background-color 500ms linear;
+}
+
+.alimentado {
+
+        /*animation: name duration timing-function delay iteration-count direction fill-mode;*/
+        /*Algum efeito que o faça girar*/
+        animation: spin 0.5s ease-in-out 0s infinite alternate;
+        /*fazer as características pro dito 'spin' */
+}
+
+@keyframes spin {
+        
+        from {/*inicio*/
+            transform: rotate(0 deg);
+        }
+        to {/*fim*/
+            transform: rotate(360 deg);
+        }
+}
+
+
+.alimentado img {
+
+    background-color: #1ab600;
+    transition: background-color 500ms linear;
+}
+/*animal deve ficar "pulsando" quando perturbado*/
+.perturbado {
+
+        animation: pulse 0.1s ease-in-out 0s infinite alternate;
+        /*fazer as características pro dito 'pulse' */
+}
+
+@keyframes pulse {
+
+    from {/*inicio*/
+        transform: scale(1); /*100% do tamanho*/
+    }
+    to {/*fim*/
+        transform: scale(1.25); /*125% do tamanho original*/
+    }
+}
+.perturbado img {
+
+    background-color: #fb0b65; /*#fb0b0b; vermelho pro instinto selvagem*/
+    transition: background-color 350ms linear;
+
+
+}
+
+.instinto-selvagem {
+
+    /*animation: name duration timing-function delay iteration-count direction fill-mode;*/
+    animation:s jump 0.5s cubic-bezier(.37,1.89,.59,.73) 0s infinite alternate;
+    /*checar e testar valores pro cubic-bezier */
+
+
+}
+
+@keyframes jump { /*salto do animal sob instinto */
+
+    from { transform: scale(1)}
+    to { transform: scale(1.4)}
+  }
+
+.instinto-selvagem img {
+
+    background-color: #fb0b0b;
+    transition: background-color 350ms linear;
+    animation: wild_blink 0.1s linear infinite alternate;
+}
+
+
+@keyframes wild_blink { /*ficar piscando na mesma cor ou em um tom diferente(?)*/
+
+    from {
+        background-color: #fb0b0b
+    }
+    to {
+        background-color: #fb0b0b
+    }
+    
+}
+/*Ao menos as cores estão aparecendo tranquilas. Problema é ainda fazer os botões funcionarem */
+
 
 /*
  * Exercício 3: Criar uma imagem sprite com as imagens dos botões de controle
@@ -32,8 +131,24 @@
  */
 
 .comecar,
-.parar {}
+/*então*/
+.parar {
 
-.comecar {}
+    background-image: url(imgs/sprite-controles.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+/*então*/
+.comecar { /* testar e corrigir as dimensões => apareceu o começar mas não o parar => RESOLVIDO*/
 
-.parar {}
+    width:  30px;
+    height: 30px;
+    background-position: 0px 5px;
+}
+/*então*/
+.parar {
+
+    width:  30px;
+    height: 30px;
+    background-position: 0px -20px;
+}
